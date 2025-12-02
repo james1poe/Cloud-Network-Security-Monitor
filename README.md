@@ -41,7 +41,9 @@ Description: Confirm that the instance is deployed and running with an assigned 
 Description: Launch an SSH session to configure the machine.
 
 Command used:jbpoe095@security-monitor
-"screenshot here"
+<img width="1111" height="673" alt="Screenshot 2025-12-02 at 6 52 31 PM" src="https://github.com/user-attachments/assets/24ed8b5a-0c21-4a71-a894-9dbdd4a32590" />
+
+
 
 ---
 
@@ -49,11 +51,8 @@ Command used:jbpoe095@security-monitor
 
 ## Step 5 — Update System Packages
 Description: Update and upgrade system packages to ensure all software is current.
-"screenshot here"
 
----
-
-Command:sudo apt update && sudo apt upgrade -y"screenshot here"
+Command:sudo apt update && sudo apt upgrade -y
 <img width="894" height="575" alt="screenshots:06_system_update" src="https://github.com/user-attachments/assets/17a37193-848f-403a-a6da-bb8ef6c4b5d0" />
 
 ---
