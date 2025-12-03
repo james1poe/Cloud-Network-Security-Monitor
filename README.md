@@ -40,7 +40,6 @@ Description: Confirm that the instance is deployed and running with an assigned 
 ## Step 4 — Connect to VM via SSH
 Description: Launch an SSH session to configure the machine.
 
-Command used:jbpoe095@security-monitor
 <img width="1111" height="673" alt="Screenshot 2025-12-02 at 6 52 31 PM" src="https://github.com/user-attachments/assets/24ed8b5a-0c21-4a71-a894-9dbdd4a32590" />
 
 
