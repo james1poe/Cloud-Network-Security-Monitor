@@ -257,7 +257,7 @@ sudo crontab -e
 
 ---
 
-## Example hardened alert script (reference)
+## Example hardened alert script
 Place and configure the following as `/usr/local/bin/security-alert.sh` (make executable). This is a hardened example that avoids broken quotes, uses a date fragment matching syslog, and thresholding to avoid email storms. Be sure to set `ALERT_EMAIL` before using.
 
 ```bash
