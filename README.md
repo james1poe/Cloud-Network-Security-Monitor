@@ -51,7 +51,9 @@ Launch an SSH session to configure the machine.
 ## Step 5 — Update System Packages
 Update and upgrade system packages to ensure all software is current.
 
-Command:sudo apt update && sudo apt upgrade -y
+Command:
+
+sudo apt update && sudo apt upgrade -y
 <img width="894" height="575" alt="screenshots:06_system_update" src="https://github.com/user-attachments/assets/17a37193-848f-403a-a6da-bb8ef6c4b5d0" />
 
 ---
@@ -59,7 +61,8 @@ Command:sudo apt update && sudo apt upgrade -y
 ## Step 6 — Create a New Admin User
 Add a new non-root administrator account with sudo privileges.
 
-Commands: sudo adduser james
+Commands: 
+sudo adduser james
 sudo usermod -aG sudo james
 <img width="889" height="150" alt="User Setup" src="https://github.com/user-attachments/assets/ba8052b6-63df-4a82-9efd-052d3d5e2764" />
 
@@ -69,7 +72,9 @@ sudo usermod -aG sudo james
 ## Step 7 — Enable and Configure Firewall (UFW)
 Enable UFW firewall to restrict unauthorized traffic.
 
-Commands:sudo ufw allow OpenSSH
+Commands:
+
+sudo ufw allow OpenSSH
 sudo ufw enable
 <img width="899" height="94" alt="Screenshot 2025-12-02 at 6 47 28 PM" src="https://github.com/user-attachments/assets/69f32472-2a00-4cca-9c73-a76da3825491" />
 
@@ -81,7 +86,9 @@ sudo ufw enable
 ## Step 8 — Install Fail2Ban for SSH Protection
 Fail2Ban monitors authentication logs and blocks repeated failed login attempts.
 
-Command:sudo apt install fail2ban -y
+Command:
+
+sudo apt install fail2ban -y
 <img width="900" height="580" alt="screenshots:09_fail2ban_install" src="https://github.com/user-attachments/assets/9555b1de-694a-482a-aee3-87f425e9eb3b" />
 
 
@@ -90,7 +97,9 @@ Command:sudo apt install fail2ban -y
 ## Step 9 — Verify Fail2Ban Is Running
 Check that Fail2Ban is active and monitoring SSH logs.
 
-Command:sudo systemctl status fail2ban
+Command:
+
+sudo systemctl status fail2ban
 <img width="899" height="335" alt="screenshots:10_fail2ban_running" src="https://github.com/user-attachments/assets/ae5d1ebe-ccc1-49a4-a2bd-ca77e15699ac" />
 
 
@@ -99,7 +108,9 @@ Command:sudo systemctl status fail2ban
 ## Step 10 — Install Nginx for Log Generation
 Nginx provides HTTP logs that can be monitored for anomalies.
 
-Command:sudo apt install nginx -y
+Command:
+
+sudo apt install nginx -y
 <img width="900" height="574" alt="Nginx Install" src="https://github.com/user-attachments/assets/b9220066-887d-4246-9ed4-51f631b1017b" />
 
 
@@ -108,7 +119,9 @@ Command:sudo apt install nginx -y
 ## Step 11 — Install Suricata IDS
 Suricata monitors network traffic for suspicious or malicious behavior.
 
-Command:sudo apt install suricata -y
+Command:
+
+sudo apt install suricata -y
 <img width="796" height="680" alt="17_suricata_install" src="https://github.com/user-attachments/assets/c5f087d4-ed65-4dfc-ad16-5a4d201594f0" />
 
 
@@ -117,7 +130,9 @@ Command:sudo apt install suricata -y
 ## Step 12 — Confirm Suricata Is Active
 Verify that Suricata is running correctly.
 
-Command:sudo systemctl status suricata
+Command:
+
+sudo systemctl status suricata
 
 <img width="808" height="322" alt="18_suricata_running" src="https://github.com/user-attachments/assets/e9863f2e-fdd0-475e-986c-8e952b5d7fc4" />
 
@@ -128,7 +143,9 @@ Command:sudo systemctl status suricata
 ## Step 13 — Install Mailutils
 Mailutils allows the system to send email alerts.
 
-Command:sudo apt install mailutils -y
+Command:
+
+sudo apt install mailutils -y
 <img width="898" height="123" alt="Mailutils install" src="https://github.com/user-attachments/assets/2738c67f-5425-46f6-951f-83c0e3cffeee" />
 
 
@@ -137,7 +154,9 @@ Command:sudo apt install mailutils -y
 ## Step 14 — Test Email Alert Function
 Send yourself a test message to verify email functionality.
 
-Command:echo “Security Alert Test” | mail -s “Alert Test” jbpoe095@gmail.com
+Command:
+
+echo “Security Alert Test” | mail -s “Alert Test” jbpoe095@gmail.com
 
 <img width="809" height="555" alt="Email Test Command Sent" src="https://github.com/user-attachments/assets/01923619-e9ad-417b-8f35-f80cea7d45a3" />
 
@@ -148,7 +167,9 @@ Command:echo “Security Alert Test” | mail -s “Alert Test” jbpoe095@gmail
 ## Step 15 — Install Cron Service
 Install cron, the service used to schedule recurring tasks.
 
-Commands: sudo apt install cron -y
+Commands: 
+
+sudo apt install cron -y
 
 sudo systemctl status cron
 <img width="892" height="272" alt="Cron install" src="https://github.com/user-attachments/assets/b4576521-021e-465d-b6cc-7a0d9b7a0549" />
@@ -158,7 +179,9 @@ sudo systemctl status cron
 ## Step 16 — Create Security Alert Script
 This script checks `/var/log/auth.log` for failed SSH login attempts and sends alerts.
 
-Command:sudo nano /usr/local/bin/security-alert.sh
+Command:
+
+sudo nano /usr/local/bin/security-alert.sh
 
 Script content: #!/bin/bash
 
@@ -176,14 +199,18 @@ fi
 ## Step 17 — Make Script Executable
 Change script permissions to allow execution.
 
-Command:sudo chmod +x /usr/local/bin/security-alert.sh
+Command:
+
+sudo chmod +x /usr/local/bin/security-alert.sh
 
 ---
 
 ## Step 18 — Add Cron Job
 Schedule the script to run every 5 minutes.
 
-Command:sudo crontab -e
+Command:
+
+sudo crontab -e
 Cron entry:*/5 * * * * /usr/local/bin/security-alert.sh
 <img width="891" height="567" alt="Cron Job visible in Nano" src="https://github.com/user-attachments/assets/9289ec50-0c81-4e92-943f-236d618e7791" />
 
