@@ -35,27 +35,38 @@ Goal: deploy a single-cloud VM lab demonstrating basic host/network monitoring a
 ## Diagram
 
 ```mermaid
-graph LR
-  subgraph Cloud
-    GCP["Google Cloud VM Ubuntu"]
-  end
-  UFW["UFW Firewall"]
-  Fail2Ban["Fail2Ban (SSH)"]
-  Suricata["Suricata IDS"]
-  Nginx["Nginx (optional)"]
-  Mail["Mailutils (SMTP / Relay)"]
-  SIEM["SIEM / Log Forwarder (Filebeat / Wazuh / ELK)"]
+flowchart TD
+    subgraph Internet
+        A1[Attacker 1]
+        A2[Botnet]
+        A3[Legitimate User]
+    end
 
-  GCP --> UFW
-  GCP --> Fail2Ban
-  GCP --> Suricata
-  GCP --> Nginx
-  GCP --> Mail
-  Suricata --> SIEM
-  Nginx --> SIEM
-  Fail2Ban --> Mail
+    subgraph CloudVPC
+        G1[SSH Service - sshd]
+        G2[App Server]
+        G3[Auth Logs]
+        G4[Fail2Ban]
+        G5[Alert System]
+        G6[Banned IP List]
+    end
+
+    subgraph AdminSOC
+        S1[Admin Console]
+        S2[Mobile Notification]
+    end
+
+    A1 -- Brute Force --> G1
+    A2 -- Distributed Attacks --> G1
+    A3 -. SSH Login .-> G1
+    G1 -- Log Events --> G3
+    G3 -- Suspicious Patterns --> G4
+    G4 -- IP Ban --> G6
+    G4 -- Triggers Alert --> G5
+    G5 -- Notification --> S2
+    S2 -- Alert Processed --> S1
+    S1 -- Updates Security Controls --> G4
 ```
-
 ---
 
 ## Quickstart (TL;DR)
@@ -290,6 +301,12 @@ fi
   - Use test PCAPs or scanner rules; check `/var/log/suricata/eve.json` (if enabled).
 - Email:
   - Check `/var/log/mail.log` and that your SMTP relay/port is reachable.
+### Example Brute Force Logging Notification
+![IMG_5767](https://github.com/user-attachments/assets/b2587cb9-2e13-4444-9cb8-8d08b51f94cc)
+
+
+
+> _Fail2Ban blocks brute force attempts and notifies administrators when an attack is detected._
 
 ---
 
